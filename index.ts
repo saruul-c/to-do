@@ -1,14 +1,9 @@
-import express from "express";
-import { router } from "./routers";
+import app from './app';  // Import the express app setup from app.ts
 
-const app: express.Application = express();
+const port = process.env.PORT || 3100;  // Set the port
 
-app.use(router);
-const PORT = 3001;
-
-// Server setup
-app.listen(PORT, () => {
-  console.log(`server is running on
-		http://localhost:${PORT}/`);
-    console.log('temp3')
+// Start the server
+app.listen(port, () => {
+    console.log(`Server is running on http://localhost:${port}`);
+    console.log(`Press CTRL+C to stop the server`);
 });
