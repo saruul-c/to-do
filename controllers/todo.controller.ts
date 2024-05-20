@@ -1,78 +1,97 @@
 import { Request, Response } from "express";
-import { Task } from "../models/task.model";
+import { TodoService } from "../services/todo.service";
 
-// Sample in-memory storage for tasks (replace with database logic)
-let tasks: Task[] = [];
-
-// GET /tasks - Get all tasks
-export const getAllTasks = (req: Request, res: Response) => {
-  try {
-    res.json(tasks);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Internal server error" });
-  }
-};
-
-// POST /tasks - Create a new task
-export const createTask = (req: Request, res: Response) => {
-  try {
-    const { id, task_name, priority, completion_status, project_id, time_spent, created_at } = req.body;
-    const newTask = new Task(id, task_name, priority, completion_status, project_id, time_spent, created_at);
-    tasks.push(newTask);
-    res.status(201).json(newTask);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Internal server error" });
-  }
-};
-
-// PUT /tasks/:id - Update an existing task
-export const updateTask = (req: Request, res: Response) => {
-  try {
-    const id = parseInt(req.params.id);
-    const { task_name, priority, completion_status, project_id, time_spent, created_at } = req.body;
-    const task = tasks.find(task => task.id === id);
-    if (!task) {
-      res.status(404).json({ message: "Task not found" });
-      return;
-    }
-    task.updateCompletionStatus(completion_status);
-    task.renameTask(task_name);
-    task.editTaskDetails(task_name, priority, project_id);
-    if (time_spent) {
-      task.addTimeSpent(time_spent);
-    }
-    if (created_at) {
-      task.updateCreatedAt(created_at);
-    }
-    res.json(task);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Internal server error" });
-  }
-};
-
-// DELETE /tasks/:id - Delete an existing task
-export const deleteTask = (req: Request, res: Response) => {
-  try {
-    const id = parseInt(req.params.id);
-    const index = tasks.findIndex(task => task.id === id);
-    if (index === -1) {
-      res.status(404).json({ message: "Daalgavar oldsongui" });
-      return;
-    }
-    tasks.splice(index, 1);
-    res.status(204).send();
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Uuchlaarai, servert aldaa garlaa" });
-  }
-};
+const todoService = new TodoService();
 
 export const todoController = {
-  getAllTasks,
-  createTask,
-  updateTask,
-  deleteTask
+  // Controller method to get all tasks
+  getAllTasks: async (req: Request, res: Response) => {
+    if (!req.user) {
+      return res.status(401).json({ message: "Unauthorized" });
+    }
+    try {
+      const tasks = await todoService.getAllTasks();
+      res.status(200).json(tasks);
+    } catch (error) {
+      console.error("Error while getting tasks:", error);
+      res.status(500).json({ message: "Internal server error" });
+    }
+  },
+
+  // Controller method to create a new task
+  createTask: async (req: Request, res: Response) => {
+    try {
+      if (!req.user) {
+        return res.status(401).json({ message: "Unauthorized" });
+      }
+      const userId = req.user.id;
+      const taskData = {
+        ...req.body,
+        user_id: userId,
+      };
+      const newTask = await todoService.createTask(taskData);
+      res.status(201).json(newTask);
+    } catch (error) {
+      console.error("Error while creating task:", error);
+      res.status(500).json({ message: "Internal server error" });
+    }
+  },
+
+  // Controller method to update task time
+  updateTaskTime: async (req: Request, res: Response) => {
+    const { id } = req.params;
+    const { timeSpent } = req.body;
+
+    console.log("Request params:", req.params);
+    console.log("Request body:", req.body);
+    
+    if (!req.user) {
+      return res.status(401).json({ message: "Unauthorized" });
+    }
+
+    try {
+      const taskId = Number(id);
+      const timeToAdd = Number(timeSpent);
+
+      if (!id || !timeToAdd) {
+        return res.status(400).json({ message: "Invalid request: missing id or timeToAdd" });
+      }
+
+      const updatedTask = await todoService.updateTaskTime(taskId, timeToAdd);
+
+      if (!updatedTask) {
+        return res.status(404).json({ message: "Task not found" });
+      }
+
+      res.status(200).json(updatedTask);
+    } catch (error) {
+      console.error("Failed to update task time: ", error);
+      res.status(500).json({ message: "Failed to update task time" });
+    }
+  },
+
+  // Controller method to update an existing task
+  updateTask: async (req: Request, res: Response) => {
+    try {
+      const taskId = parseInt(req.params.id);
+      const updates = req.body;
+      const updatedTask = await todoService.updateTask(taskId, updates);
+      res.status(200).json(updatedTask);
+    } catch (error) {
+      console.error("Error while updating task:", error);
+      res.status(500).json({ message: "Internal server error" });
+    }
+  },
+
+  // Controller method to delete an existing task
+  deleteTask: async (req: Request, res: Response) => {
+    try {
+      const taskId = parseInt(req.params.id);
+      await todoService.deleteTask(taskId);
+      res.status(200).json({ message: "Task deleted successfully" });
+    } catch (error) {
+      console.error("Error while deleting task:", error);
+      res.status(500).json({ message: "Internal server error" });
+    }
+  },
 };

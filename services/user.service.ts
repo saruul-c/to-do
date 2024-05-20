@@ -1,32 +1,35 @@
-//services/user.service.ts
-import { User } from "../models/user.model";
 import connectionPool from "../controllers/dummy2";
+import { FieldPacket } from 'mysql2/promise';
+import bcrypt from 'bcrypt';
 
 export class UserService {
-  async createUser(username: string, password: string): Promise<User> {
-    const sql = 'INSERT INTO users (username, password) VALUES (?, ?)';
-    await connectionPool.execute(sql, [username, password]);
-
-    const newUser: User = {
-      userId: generateUserId(),
-      username,
-      password, // Note: In a real application, you would hash the password here
-      email: "" // Assuming email is optional
-      ,
-      login: function (): void {
-        throw new Error("Function not implemented.");
-      },
-      logout: function (): void {
-        throw new Error("Function not implemented.");
-      }
-    };
-
-    return newUser;
+  static findUserByEmail(email: any) {
+    throw new Error("Method not implemented.");
   }
-}
+  async createUser(username: string, password: string, email: string): Promise<void> {
+    const sql = 'INSERT INTO users (username, password, email) VALUES (?, ?, ?)';
+    await connectionPool.execute(sql, [username, password, email]);
+  }
 
-function generateUserId(): string {
-  // Generate a unique user ID using a library like uuid
-  // For simplicity, we'll just return a random string here
-  return Math.random().toString();
+  async findUserByUsername(username: string): Promise<any> {
+    const sql = 'SELECT * FROM users WHERE username = ?';
+    const [rows]: [any[], FieldPacket[]] = await connectionPool.execute(sql, [username]) as [any[], FieldPacket[]];
+    return rows[0]; // Assumed that rows is array of any    
+  }
+
+  async loginUser(username: string, password: string): Promise<boolean> {
+    const user = await this.findUserByUsername(username);
+    if (!user) return false; // User not found
+
+    // Compare hashed password with the provided password
+    return bcrypt.compare(password, user.password);
+  }
+
+  async forgotPassword(email: string): Promise<void> {
+    // Implement logic to generate and send a password reset email
+  }
+
+  async resetPassword(email: string, newPassword: string, resetToken: string): Promise<void> {
+    // Implement logic to reset user's password
+  }
 }

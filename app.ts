@@ -6,24 +6,23 @@ const cors = require("cors");
 
 // Import routers
 import userRouter from "./routers/user.router";
+import todoRouter from "./routers/todo.router";
 
 
 // Initialize dotenv to use environment variables
 dotenv.config();
 
 const app = express();
-
 const port = process.env.PORT || 3100;
 
 // Middleware setup
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cookieParser());
-app.use(express.json());
 app.use(cors({ origin: process.env.APP_URL, credentials: true }));
 
-// API route setups
 app.use("/api/users", userRouter);
+app.use("/api/todos", todoRouter); // Add this line to use the todo router
 
 // Root route
 app.get("/", (req: Request, res: Response) => {
@@ -40,5 +39,6 @@ app.use((req: Request, res: Response) => {
     status: 404,
   });
 });
+
 
 export default app;

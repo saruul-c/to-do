@@ -1,23 +1,27 @@
-import { Request, Response, NextFunction } from 'express';
-import { verifyToken } from '../utils/jwt.utils';
+// middleware/auth.middleware.ts
+import { Request, Response, NextFunction } from "express";
+import { verifyJWT } from "../utils/jwt.utils";
 
 export const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
-    // Input validation logic
-    if (!req.body.title || typeof req.body.title !== 'string') {
-        return res.status(400).json({ error: 'String өгөгдөл таарсангүй' });
-    }
+  const authHeader = req.headers.authorization;
+  if (!authHeader) {
+    return res.status(401).json({ message: "Authorization header is missing" });
+  }
 
-    // Token verification logic
-    const token = req.headers.authorization?.split(' ')[1];
-    if (!token) {
-        return res.status(401).send('Tatgalzlaa. Token baihgui baina.');
-    }
+  const token = authHeader.split(' ')[1];
+  
+  if (!token) {
+    return res.status(401).json({ message: "Token is missing" });
+  }
 
-    try {
-        const decoded = verifyToken(token); 
-        req.user = decoded; 
-        next();
-    } catch (error) {
-        res.status(400).send('Token tohirsongui.');
-    }
+  try{
+    const decoded = verifyJWT(token);
+  if (!decoded) {
+    return res.status(401).json({ message: "Invalid or expired token" });
+  }
+  req.user = decoded;
+  next();
+  } catch (error) {
+    res.status(400).send('Token tohirsongui.');
+  } 
 };

@@ -1,0 +1,90 @@
+Date : 2024-05-20 11:59:38
+Directory : e:\todo-backend
+Total : 42 files,  6881 codes, 121 comments, 181 blanks, all 7183 lines
+
+Languages
++--------------------+------------+------------+------------+------------+------------+
+| language           | files      | code       | comment    | blank      | total      |
++--------------------+------------+------------+------------+------------+------------+
+| JSON               |          2 |      5,656 |          0 |          2 |      5,658 |
+| TypeScript         |         18 |        604 |         84 |        157 |        845 |
+| JavaScript         |         19 |        587 |         37 |         19 |        643 |
+| JSON with Comments |          1 |         28 |          0 |          1 |         29 |
+| Markdown           |          2 |          6 |          0 |          2 |          8 |
++--------------------+------------+------------+------------+------------+------------+
+
+Directories
++-----------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                | files      | code       | comment    | blank      | total      |
++-----------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                   |         42 |      6,881 |        121 |        181 |      7,183 |
+| . (Files)                                           |          7 |      5,726 |          7 |         19 |      5,752 |
+| controllers                                         |          4 |        286 |         19 |         62 |        367 |
+| dist                                                |         18 |        582 |         36 |         18 |        636 |
+| dist (Files)                                        |          2 |         42 |          7 |          2 |         51 |
+| dist\controllers                                    |          4 |        211 |         16 |          4 |        231 |
+| dist\handlers                                       |          1 |         20 |          1 |          1 |         22 |
+| dist\middleware                                     |          1 |         20 |          0 |          1 |         21 |
+| dist\models                                         |          3 |         61 |          6 |          3 |         70 |
+| dist\routers                                        |          3 |         80 |          3 |          3 |         86 |
+| dist\services                                       |          3 |        126 |          2 |          3 |        131 |
+| dist\utils                                          |          1 |         22 |          1 |          1 |         24 |
+| handlers                                            |          1 |          0 |         23 |          6 |         29 |
+| middleware                                          |          1 |         22 |          1 |          5 |         28 |
+| models                                              |          3 |         50 |         25 |         16 |         91 |
+| routers                                             |          2 |         44 |          3 |         18 |         65 |
+| services                                            |          2 |        130 |          5 |         26 |        161 |
+| test                                                |          1 |          0 |          0 |          1 |          1 |
+| to-do                                               |          1 |          4 |          0 |          1 |          5 |
+| types                                               |          1 |          8 |          1 |          2 |         11 |
+| utils                                               |          1 |         29 |          1 |          7 |         37 |
++-----------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++-----------------------------------------------------+--------------------+------------+------------+------------+------------+
+| filename                                            | language           | code       | comment    | blank      | total      |
++-----------------------------------------------------+--------------------+------------+------------+------------+------------+
+| e:\todo-backend\README.md                           | Markdown           |          2 |          0 |          1 |          3 |
+| e:\todo-backend\app.ts                              | TypeScript         |         29 |          5 |         11 |         45 |
+| e:\todo-backend\controllers\dummy.ts                | TypeScript         |         62 |         11 |         21 |         94 |
+| e:\todo-backend\controllers\dummy2.ts               | TypeScript         |         22 |          0 |          8 |         30 |
+| e:\todo-backend\controllers\todo.controller.ts      | TypeScript         |         79 |          5 |         14 |         98 |
+| e:\todo-backend\controllers\user.controller.ts      | TypeScript         |        123 |          3 |         19 |        145 |
+| e:\todo-backend\dist\app.js                         | JavaScript         |         31 |          6 |          1 |         38 |
+| e:\todo-backend\dist\controllers\dummy.js           | JavaScript         |         51 |         10 |          1 |         62 |
+| e:\todo-backend\dist\controllers\dummy2.js          | JavaScript         |         17 |          3 |          1 |         21 |
+| e:\todo-backend\dist\controllers\todo.controller.js | JavaScript         |         31 |          0 |          1 |         32 |
+| e:\todo-backend\dist\controllers\user.controller.js | JavaScript         |        112 |          3 |          1 |        116 |
+| e:\todo-backend\dist\handlers\jwt.handler.js        | JavaScript         |         20 |          1 |          1 |         22 |
+| e:\todo-backend\dist\index.js                       | JavaScript         |         11 |          1 |          1 |         13 |
+| e:\todo-backend\dist\middleware\auth.middleware.js  | JavaScript         |         20 |          0 |          1 |         21 |
+| e:\todo-backend\dist\models\task.model.js           | JavaScript         |         23 |          1 |          1 |         25 |
+| e:\todo-backend\dist\models\tasklist.model.js       | JavaScript         |         20 |          0 |          1 |         21 |
+| e:\todo-backend\dist\models\user.model.js           | JavaScript         |         18 |          5 |          1 |         24 |
+| e:\todo-backend\dist\routers\index.js               | JavaScript         |         32 |          3 |          1 |         36 |
+| e:\todo-backend\dist\routers\todo.router.js         | JavaScript         |          7 |          0 |          1 |          8 |
+| e:\todo-backend\dist\routers\user.router.js         | JavaScript         |         41 |          0 |          1 |         42 |
+| e:\todo-backend\dist\services\task.service.js       | JavaScript         |         42 |          0 |          1 |         43 |
+| e:\todo-backend\dist\services\taskList.service.js   | JavaScript         |         42 |          0 |          1 |         43 |
+| e:\todo-backend\dist\services\user.service.js       | JavaScript         |         42 |          2 |          1 |         45 |
+| e:\todo-backend\dist\utils\jwt.utils.js             | JavaScript         |         22 |          1 |          1 |         24 |
+| e:\todo-backend\handlers\jwt.handler.ts             | TypeScript         |          0 |         23 |          6 |         29 |
+| e:\todo-backend\index.ts                            | TypeScript         |          6 |          1 |          3 |         10 |
+| e:\todo-backend\jest.config.js                      | JavaScript         |          5 |          1 |          1 |          7 |
+| e:\todo-backend\middleware\auth.middleware.ts       | TypeScript         |         22 |          1 |          5 |         28 |
+| e:\todo-backend\models\task.model.ts                | TypeScript         |         32 |          0 |          6 |         38 |
+| e:\todo-backend\models\tasklist.model.ts            | TypeScript         |          0 |         20 |          6 |         26 |
+| e:\todo-backend\models\user.model.ts                | TypeScript         |         18 |          5 |          4 |         27 |
+| e:\todo-backend\package-lock.json                   | JSON               |      5,613 |          0 |          1 |      5,614 |
+| e:\todo-backend\package.json                        | JSON               |         43 |          0 |          1 |         44 |
+| e:\todo-backend\routers\todo.router.ts              | TypeScript         |         14 |          2 |          6 |         22 |
+| e:\todo-backend\routers\user.router.ts              | TypeScript         |         30 |          1 |         12 |         43 |
+| e:\todo-backend\services\todo.service.ts            | TypeScript         |        104 |          2 |         19 |        125 |
+| e:\todo-backend\services\user.service.ts            | TypeScript         |         26 |          3 |          7 |         36 |
+| e:\todo-backend\test\test.ts                        | TypeScript         |          0 |          0 |          1 |          1 |
+| e:\todo-backend\to-do\README.md                     | Markdown           |          4 |          0 |          1 |          5 |
+| e:\todo-backend\tsconfig.json                       | JSON with Comments |         28 |          0 |          1 |         29 |
+| e:\todo-backend\types\types.d.ts                    | TypeScript         |          8 |          1 |          2 |         11 |
+| e:\todo-backend\utils\jwt.utils.ts                  | TypeScript         |         29 |          1 |          7 |         37 |
+| Total                                               |                    |      6,881 |        121 |        181 |      7,183 |
++-----------------------------------------------------+--------------------+------------+------------+------------+------------+

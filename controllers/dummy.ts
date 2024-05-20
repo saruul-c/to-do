@@ -63,6 +63,16 @@ app.put("/todos/:id", (req, res) => {
   res.json(updatedTodo);
 });
 
+app.post("/todos/:id", (req, res) => {
+  const id = parseInt(req.params.id);
+  const index = todos.findIndex((todo) => todo.id === id);
+
+  if (index === -1) {
+    return res.status(404).json({ error: "Todo not found" });
+  }
+  
+  
+});
 // DELETE endpoint to remove an existing todo item
 app.delete("/todos/:id", (req, res) => {
   const id = parseInt(req.params.id);
