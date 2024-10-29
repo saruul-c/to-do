@@ -6,7 +6,7 @@ const cors = require("cors");
 
 // Import routers
 import userRouter from "./routers/user.router";
-import todoRouter from "./routers/todo.router";
+// import todoRouter from "./routers/todo.router";
 
 
 // Initialize dotenv to use environment variables
@@ -22,7 +22,7 @@ app.use(cookieParser());
 app.use(cors({ origin: process.env.APP_URL, credentials: true }));
 
 app.use("/api/users", userRouter);
-app.use("/api/todos", todoRouter); // Add this line to use the todo router
+// app.use("/api/todos", todoRouter); // Add this line to use the todo router
 
 // Root route
 app.get("/", (req: Request, res: Response) => {

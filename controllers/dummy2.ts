@@ -2,8 +2,8 @@ import mysql2 from 'mysql2/promise';
 
 const DB_HOST = 'localhost';
 const DB_USER = 'root';
-const DB_PASSWORD = 'root';
-const DB_NAME = 'task'; 
+const DB_PASSWORD = 'Saruul.0807';
+const DB_NAME = 'ubtzYouth'; 
 
 console.log('Creating connection pool...');
 
